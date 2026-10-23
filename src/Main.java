@@ -16,14 +16,11 @@ public class Main {
         char robot = 'R';
         estacion[0][0] = robot;
 
-        char meta = 'M';
+        char meta = 'F';
         estacion[9][9] = meta;
 
-        int vida = 10;
-
-        int frandom = random.nextInt(10);
-        int crandom = random.nextInt(10);
-
+        int frandom;
+        int crandom;
 
         for (int i = 0; i < 5; i++) {
             do {
@@ -39,50 +36,41 @@ public class Main {
         } while (estacion[frandom][crandom] != '*');
         estacion[frandom][crandom] = 'B';
 
+        for (int f = 0; f < 10; f++) {
+            for (int c = 0; c < 10; c++) {
+                System.out.print(estacion[f][c] + " ");
+            }
+            System.out.println();
+        }
 
         int frobot = 0;
         int crobot = 0;
-
-
+        int vidas = 10;
         do {
-            for (int f = 0; f < 10; f++) {
-                for (int c = 0; c < 10; c++) {
-                    System.out.print(estacion[f][c] + " ");
-                }
-                System.out.println(" ");
-            }
-
-            System.out.print("Dime a donde quieres desplazarte: ");
-            char mover = Character.toUpperCase(sc.next().charAt(0));
+            System.out.print("Dime a donde quieres desplazarte (W/A/S/D): ");
+            char mover = sc.next().charAt(0);
 
             if (mover == 'D') {
                 if (crobot == 9) {
                     System.out.println("Estas en el limite, no puedes avanzar");
-                }else{
+                } else {
                     if (estacion[frobot][crobot + 1] == 'X') {
                         System.out.println("Movimiento bloqueado");
-                    }
-                    else if (estacion[frobot][crobot + 1] == 'B') {
-                        vida = vida + 2;
+                    } else if (estacion[frobot][crobot + 1] == 'B') {
+                        vidas = vidas + 2;
                         estacion[frobot][crobot] = '*';
                         crobot = crobot + 1;
                         estacion[frobot][crobot] = robot;
-                        System.out.println("Tienes dos vidas mas: " + vida + " vidas");
-                    }
-                    else if (estacion[frobot][crobot + 1] == 'M') {
+                        System.out.println("Tienes dos vidas mas");
+                    } else if (estacion[frobot][crobot + 1] == meta) {
                         estacion[frobot][crobot] = '*';
                         crobot = crobot + 1;
                         estacion[frobot][crobot] = robot;
                         System.out.println("Rescate completado");
-
-                        break;
-                    }
-                    else if(estacion[frobot][crobot + 1] == '*') {
+                    } else if (estacion[frobot][crobot + 1] == '*') {
                         estacion[frobot][crobot] = '*';
                         crobot = crobot + 1;
-                        vida --;
                         estacion[frobot][crobot] = robot;
-                        System.out.println("Te quedan: " + vida + " vida. Fin del juego.");
                     }
                 }
             }
@@ -90,31 +78,24 @@ public class Main {
             if (mover == 'A') {
                 if (crobot == 0) {
                     System.out.println("Estas en el limite, no puedes avanzar");
-                }else{
+                } else {
                     if (estacion[frobot][crobot - 1] == 'X') {
                         System.out.println("Movimiento bloqueado");
-                    }
-                    else if (estacion[frobot][crobot - 1] == 'B') {
-                        vida = vida + 2;
+                    } else if (estacion[frobot][crobot - 1] == 'B') {
+                        vidas = vidas + 2;
                         estacion[frobot][crobot] = '*';
                         crobot = crobot - 1;
                         estacion[frobot][crobot] = robot;
-                        System.out.println("Tienes dos vidas mas: " + vida + " vidas");
-                    }
-                    else if (estacion[frobot][crobot - 1] == 'M') {
+                        System.out.println("Tienes dos vidas mas");
+                    } else if (estacion[frobot][crobot - 1] == meta) {
                         estacion[frobot][crobot] = '*';
                         crobot = crobot - 1;
                         estacion[frobot][crobot] = robot;
                         System.out.println("Rescate completado");
-
-                        break;
-                    }
-                    else if(estacion[frobot][crobot - 1] == '*') {
+                    } else if (estacion[frobot][crobot - 1] == '*') {
                         estacion[frobot][crobot] = '*';
                         crobot = crobot - 1;
-                        vida --;
                         estacion[frobot][crobot] = robot;
-                        System.out.println("Te quedan: " + vida + " vida. Fin del juego.");
                     }
                 }
             }
@@ -122,31 +103,24 @@ public class Main {
             if (mover == 'W') {
                 if (frobot == 0) {
                     System.out.println("Estas en el limite, no puedes avanzar");
-                }else{
+                } else {
                     if (estacion[frobot - 1][crobot] == 'X') {
                         System.out.println("Movimiento bloqueado");
-                    }
-                    else if (estacion[frobot - 1][crobot] == 'B') {
-                        vida = vida + 2;
+                    } else if (estacion[frobot - 1][crobot] == 'B') {
+                        vidas = vidas + 2;
                         estacion[frobot][crobot] = '*';
                         frobot = frobot - 1;
                         estacion[frobot][crobot] = robot;
-                        System.out.println("Tienes dos vidas mas: " + vida + " vidas. ");
-                    }
-                    else if (estacion[frobot - 1][crobot] == 'M') {
+                        System.out.println("Tienes dos vidas mas");
+                    } else if (estacion[frobot - 1][crobot] == meta) {
                         estacion[frobot][crobot] = '*';
                         frobot = frobot - 1;
                         estacion[frobot][crobot] = robot;
                         System.out.println("Rescate completado");
-
-                        break;
-                    }
-                    else if(estacion[frobot - 1][crobot] == '*') {
+                    } else if (estacion[frobot - 1][crobot] == '*') {
                         estacion[frobot][crobot] = '*';
                         frobot = frobot - 1;
-                        vida --;
                         estacion[frobot][crobot] = robot;
-                        System.out.println("Te quedan: " + vida + " vida. Fin del juego.");
                     }
                 }
             }
@@ -154,37 +128,40 @@ public class Main {
             if (mover == 'S') {
                 if (frobot == 9) {
                     System.out.println("Estas en el limite, no puedes avanzar");
-                }
-                else{
+                } else {
                     if (estacion[frobot + 1][crobot] == 'X') {
                         System.out.println("Movimiento bloqueado");
-                    }
-                    else if (estacion[frobot + 1][crobot] == 'B') {
-                        vida = vida + 2;
+                    } else if (estacion[frobot + 1][crobot] == 'B') {
+                        vidas = vidas + 2;
                         estacion[frobot][crobot] = '*';
                         frobot = frobot + 1;
                         estacion[frobot][crobot] = robot;
-                        System.out.println("Tienes dos vidas mas: " + vida + " vidas");
-                    }
-                    else if (estacion[frobot + 1][crobot] == 'M') {
+                        System.out.println("Tienes dos vidas mas");
+                    } else if (estacion[frobot + 1][crobot] == meta) {
                         estacion[frobot][crobot] = '*';
                         frobot = frobot + 1;
                         estacion[frobot][crobot] = robot;
                         System.out.println("Rescate completado");
-
                         break;
-                    }
-                    else if(estacion[frobot + 1][crobot] == '*') {
+                    } else if (estacion[frobot + 1][crobot] == '*') {
                         estacion[frobot][crobot] = '*';
                         frobot = frobot + 1;
-                        vida --;
                         estacion[frobot][crobot] = robot;
-                        System.out.println("Te quedan: " + vida + " vida. Fin del juego.");
                     }
                 }
             }
-        } while (vida != 0);
 
+            if (mover != 'W' && mover != 'A' && mover != 'S' && mover != 'D') {
+                System.out.println("Ese no es un caracter valido.");
+            }
+
+            for (int f = 0; f < 10; f++) {
+                for (int c = 0; c < 10; c++) {
+                    System.out.print(estacion[f][c] + " ");
+                }
+                System.out.println();
+            }
+            System.out.println("Vidas: " + vidas);
+        } while (estacion[frobot][crobot] != meta);
     }
 }
-
